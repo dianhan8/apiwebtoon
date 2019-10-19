@@ -13,6 +13,10 @@ const FavoriteController = require('./controllers/favorite')
 const UserController = require('./controllers/user')
 const { authenticated } = require('./middleware')
 
+app.get('/', (req, res)=>{
+    res.send('Succes')
+})
+
 app.use(bodyParser.json())
 app.group('/api/v1',(router)=>{
     //User
