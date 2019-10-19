@@ -70,4 +70,4 @@ app.group('/api/v1',(router)=>{
     router.delete('/user/:userid/webtoon/:webtoonid/episode/:episodeid/images/:imagesid',authenticated,DetailController.deleteImage)
 })
 
-app.listen(port, ()=>console.log(`SERVER RUN IN ${port}`))
+app.listen(process.env.PORT||2950, ()=>console.log(`SERVER RUN IN ${port}`))
