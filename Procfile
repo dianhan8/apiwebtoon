@@ -1,2 +1,2 @@
-relase: node_modules/.bin.sequelixq db:migrate
+release: node_modules/.bin.sequelixq db:migrate
 web: node index.js
