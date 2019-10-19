@@ -70,4 +70,6 @@ app.group('/api/v1',(router)=>{
     router.delete('/user/:userid/webtoon/:webtoonid/episode/:episodeid/images/:imagesid',authenticated,DetailController.deleteImage)
 })
 
-app.listen(process.env.PORT||2950, ()=>console.log(`SERVER RUN IN ${port}`))
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
