@@ -5,9 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     episode_id: DataTypes.INTEGER
   }, {});
-  detail.associate = function(models) {
+  detail.associate = function (models) {
     // associations can be defined here
-    detail.belongsTo(models.episode,{
+    detail.belongsTo(models.episode, {
       as: "Episode",
       foreignKey: 'episode_id',
     })

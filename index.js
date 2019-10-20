@@ -34,6 +34,7 @@ app.group('/api/v1',(router)=>{
     //Webtoon
     //Show All Webtoon
     router.get('/webtoons',WebtoonController.index)
+    //Get All Webtoon By Title with Query
     router.get('/webtoon',authenticated,WebtoonController.showFavoriteSearch)
     //Create Webtoon By Users
     router.post('/user/:id/webtoons',authenticated,WebtoonController.store)
@@ -46,6 +47,7 @@ app.group('/api/v1',(router)=>{
 
     //Favorite
     router.get('/user/:userid/favorite',authenticated,FavoriteController.Favorite)
+    router.post('/user/:userid/favorite/:webtoonid',authenticated,FavoriteController.FindAndStore)
 
     //Episode
     //Show All Episode

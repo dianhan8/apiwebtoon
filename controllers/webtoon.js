@@ -6,60 +6,60 @@ const Op = require('sequelize').Op
 //Method Get /webtoons && /webtoons?title
 exports.index = (req, res) => {
     const title = req.query.title
-    if(title){
+    if (title) {
         Webtoon.findAll({
-            where:{
+            where: {
                 title: { [Op.like]: `%${title}%` }
             },
-            include:[{
-                model:Users,
-                as:"createdBy"
+            include: [{
+                model: Users,
+                as: "createdBy"
             }]
         })
-        .then(function(result){
-            res.send(result)
-        })
-        .catch(function(err){
-            res.send(result)
-        })
-    }else{
+            .then(function (result) {
+                res.send(result)
+            })
+            .catch(function (err) {
+                res.send(result)
+            })
+    } else {
         Webtoon.findAll({
             include: [{
-                model:Users,
-                as:"createdBy"
+                model: Users,
+                as: "createdBy"
             }]
         })
-        .then(function(result){
-            res.send(result)
-        })
-        .catch(function(err){
-            res.send({
-                error: true,
-                message: "Error",
-                err
+            .then(function (result) {
+                res.send(result)
             })
-        })
+            .catch(function (err) {
+                res.send({
+                    error: true,
+                    message: "Error",
+                    err
+                })
+            })
     }
 }
 
 
 //Get All Favorite By Favorite Is True
-exports.showFavoriteSearch = (req, res) =>{
+exports.showFavoriteSearch = (req, res) => {
     const favorite = req.query.is_favorite
-    if(favorite){
+    if (favorite) {
         Webtoon.findAll({
-            where:{isFavorite: favorite}
+            where: { isFavorite: favorite }
         })
-        .then(function(result){
-            res.send(result)
-        })
-        .catch(function(err){
-            res.send({
-                error: true,
-                message: "Error Cannot Find",
-                err
+            .then(function (result) {
+                res.send(result)
             })
-        })
+            .catch(function (err) {
+                res.send({
+                    error: true,
+                    message: "Error Cannot Find",
+                    err
+                })
+            })
     }
 }
 
@@ -67,18 +67,18 @@ exports.showFavoriteSearch = (req, res) =>{
 exports.showByUsers = (req, res) => {
     const user_id = req.params.id
     Webtoon.findAll({
-        where: {user_id}
+        where: { user_id }
     })
-    .then(function(result){
-        res.send(result)
-    })
-    .catch(function(err){
-        res.send({
-            error: true,
-            message: "Error Cannot Find",
-            err
+        .then(function (result) {
+            res.send(result)
         })
-    })
+        .catch(function (err) {
+            res.send({
+                error: true,
+                message: "Error Cannot Find",
+                err
+            })
+        })
 }
 
 //Store /Create Webtoons By Users Id
@@ -94,18 +94,18 @@ exports.store = (req, res) => {
         createdAt: new Date(),
         updatedAt: new Date()
     })
-    .then(function(result){
-        res.send({
-            message: "Your Account Has Created"
+        .then(function (result) {
+            res.send({
+                message: "Your Account Has Created"
+            })
         })
-    })
-    .catch(function(err){
-        res.send({
-            error: true,
-            message: "Error",
-            err
+        .catch(function (err) {
+            res.send({
+                error: true,
+                message: "Error",
+                err
+            })
         })
-    })
 }
 
 
@@ -120,43 +120,43 @@ exports.UpdateByWebtoons = (req, res) => {
         cover: body.cover,
         updatedAt: new Date()
     },
-    {
-        where: {id}
-    })
-    .then(function(result){
-        res.send({
-            ...body,
-            result
+        {
+            where: { id }
         })
-    })
-    .catch(function(err){
-        res.send({
-            error: true,
-            message: "Error can't update",
-            err
+        .then(function (result) {
+            res.send({
+                ...body,
+                result
+            })
         })
-    })
+        .catch(function (err) {
+            res.send({
+                error: true,
+                message: "Error can't update",
+                err
+            })
+        })
 }
 
 //Delete Webtoon By Users
 exports.DeleteByWebtoons = (req, res) => {
     const id = req.params.webtoonid
     Webtoon.destroy({
-        where: {id}
+        where: { id }
     })
-    .then(function(result){
-        res.send({
-            id,
-            msg: `Webtoons Id ${id} has deleted`
+        .then(function (result) {
+            res.send({
+                id,
+                msg: `Webtoons Id ${id} has deleted`
+            })
         })
-    })
-    .catch(function(err){
-        res.send({
-            error: true,
-            message: "Can't deleted webtoon",
-            err
+        .catch(function (err) {
+            res.send({
+                error: true,
+                message: "Can't deleted webtoon",
+                err
+            })
         })
-    })
 }
 
 
