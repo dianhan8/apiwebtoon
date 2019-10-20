@@ -46,10 +46,9 @@ exports.index = (req, res) => {
 //Get All Favorite By Favorite Is True
 exports.showFavoriteSearch = (req, res) =>{
     const favorite = req.query.is_favorite
-    const isFavorite = favorite == 'true' ? 1:0
     if(favorite){
         Webtoon.findAll({
-            where:{isFavorite}
+            where:{isFavorite: favorite}
         })
         .then(function(result){
             res.send(result)
