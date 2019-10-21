@@ -41,8 +41,7 @@ exports.register = (req, res) => {
     })
         .then(function (user) {
             res.send({
-                msg: `Account has created, you can login now`,
-                user
+                msg: `Account has created, you can login now`
             })
         })
         .catch((err) => {
