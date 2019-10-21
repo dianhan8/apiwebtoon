@@ -42,6 +42,11 @@ exports.FindAndStore = (req, res) => {
                 disable: true,
                 message: "Your Favorite Has Be Save in My Favorite"
             })
+            Webtoon.update({
+                isFavorite: true
+            },{
+                where:{webtoon_id}
+            })
         })
         .catch((err) => {
             res.send({
