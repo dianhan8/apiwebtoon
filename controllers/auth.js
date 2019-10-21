@@ -29,24 +29,40 @@ exports.register = (req, res) => {
     const email = req.body.email
     const password = req.body.password
 
-    User.findOrCreate({
-        where: { email },
-        defaults: {
-            email: email,
-            password: password,
-            name: name,
-            createdAt: new Date(),
-            updatedAt: new Date()
-        }
+    User.findAll({
+        where: { email }
     })
         .then(function (user) {
-            res.send({
-                msg: `Account has created, you can login now`
-            })
+            if (user.length > 0) {
+                res.send({
+                    message: "Can't Register"
+                })
+            } else if (user.length = 0) {
+                User.create({
+                    name,
+                    email,
+                    password,
+                    image: null,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                })
+                    .then(function (result) {
+                        res.send({
+                            message: "Your Account has created, you can Sign Now"
+                        })
+                    })
+                    .catch(function (err) {
+                        res.send({
+                            message: "Can't Create Account",
+                            err
+                        })
+                    })
+            }
         })
-        .catch((err) => {
+        .catch(function (err) {
             res.send({
-                msg: "Email has be used"
+                message: "Error Can't Find",
+                err
             })
         })
 }
