@@ -27,32 +27,39 @@ exports.Favorite = (req, res) => {
 exports.FindAndStore = (req, res) => {
     const user_id = req.params.userid
     const webtoon_id = req.params.webtoon_id
-    Favorite.findOrCreate({
-        where: { user_id, webtoon_id },
-        defaults: {
-            user_id,
-            webtoon_id,
-            createdAt: new Date(),
-            updatedAt: new Date()
-        }
+    Favorite.findAll({
+        where: { user_id, webtoon_id }
     })
-        .then(function (favorite) {
-            res.send({
-                id: webtoon_id,
-                disable: true,
-                message: "Your Favorite Has Be Save in My Favorite"
-            })
-            Webtoon.update({
-                isFavorite: true
-            }, {
-                where: { webtoon_id }
-            })
+        .then(function (result) {
+            if (result > 0) {
+                res.send({
+                    message: "This Webtoon Haved"
+                })
+            } else {
+                Favorite.create({
+                    user_id,
+                    webtoon_id,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                })
+                    .then(function (favorite) {
+                        res.send({
+                            condition: true,
+                            message: "This Webtoon has be Saved"
+                        })
+                    })
+                    .catch(function (err) {
+                        res.send({
+                            error: true,
+                            err
+                        })
+                    })
+            }
         })
-        .catch((err) => {
+        .catch(function (err) {
             res.send({
-                id: webtoon_id,
-                disable: true,
-                message: "This Favorite has be haved"
+                error: true,
+                err
             })
         })
 }
