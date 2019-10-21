@@ -37,7 +37,7 @@ exports.register = (req, res) => {
                 res.send({
                     message: "Can't Register"
                 })
-            } else if (user.length = 0) {
+            } else {
                 User.create({
                     name,
                     email,

@@ -44,8 +44,8 @@ exports.FindAndStore = (req, res) => {
             })
             Webtoon.update({
                 isFavorite: true
-            },{
-                where:{webtoon_id}
+            }, {
+                where: { webtoon_id }
             })
         })
         .catch((err) => {
