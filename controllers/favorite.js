@@ -44,7 +44,7 @@ exports.FindAndStore = (req, res) => {
         })
         .catch((err) => {
             res.send({
-                disable: false,
+                disable: true,
                 message: "This Favorite has be haved"
             })
         })
