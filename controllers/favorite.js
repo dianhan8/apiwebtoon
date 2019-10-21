@@ -38,12 +38,14 @@ exports.FindAndStore = (req, res) => {
     })
         .then(function (favorite) {
             res.send({
+                id: webtoon_id,
                 disable: true,
                 message: "Your Favorite Has Be Save in My Favorite"
             })
         })
         .catch((err) => {
             res.send({
+                id: webtoon_id,
                 disable: true,
                 message: "This Favorite has be haved"
             })
