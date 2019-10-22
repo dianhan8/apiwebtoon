@@ -48,7 +48,7 @@ app.group('/api/v1',(router)=>{
     //Favorite
     router.get('/user/:userid/favorite',authenticated,FavoriteController.Favorite)
     router.post('/user/:userid/favorite/:webtoonid',authenticated,FavoriteController.FindAndStore)
-    router.delete('/user/:userid/favorite/:webtoonid',authenticated,deleteFavorite)
+    router.delete('/user/:userid/favorite/:webtoonid',authenticated,FavoriteController.deleteFavorite)
 
     //Episode
     //Show All Episode
