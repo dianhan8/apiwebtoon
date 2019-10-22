@@ -25,8 +25,8 @@ exports.Favorite = (req, res) => {
 
 //Add Favorite And Find Favorite
 exports.FindAndStore = (req, res) => {
-    const user_id = req.params.userid
-    const webtoon_id = req.params.webtoon_id
+    const user_id = req.body.userid
+    const webtoon_id = req.body.webtoon_id
     Favorite.findAll({
         where: { user_id, webtoon_id }
     })
@@ -50,6 +50,7 @@ exports.FindAndStore = (req, res) => {
                     })
                     .catch(function (err) {
                         res.send({
+                            message: 'Error Run Create',
                             error: true,
                             err
                         })
@@ -58,6 +59,7 @@ exports.FindAndStore = (req, res) => {
         })
         .catch(function (err) {
             res.send({
+                message: "Error Cant Find",
                 error: true,
                 err
             })
