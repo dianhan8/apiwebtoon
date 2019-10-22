@@ -43,17 +43,15 @@ exports.FindAndStore = (req, res) => {
                     updatedAt: new Date()
                 })
                     .then(function (favorite) {
+                        res.send({
+                            condition: true,
+                            message: "This Webtoon has be Saved"
+                        })
                         Webtoon.update({
                             isFavorite: true
                         }, {
                             where: { webtoon_id }
                         })
-                            .then(function (result) {
-                                res.send({
-                                    condition: true,
-                                    message: "This Webtoon has be Saved"
-                                })
-                            })
                     })
                     .catch(function (err) {
                         res.send({
