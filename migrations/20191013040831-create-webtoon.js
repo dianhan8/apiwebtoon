@@ -20,6 +20,9 @@ module.exports = {
       isFavorite:{
         type: Sequelize.BOOLEAN
       },
+      favorite_count: {
+        type: Sequelize.INTEGER
+      },
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
