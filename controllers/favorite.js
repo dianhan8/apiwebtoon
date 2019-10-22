@@ -26,7 +26,7 @@ exports.Favorite = (req, res) => {
 //Add Favorite And Find Favorite
 exports.FindAndStore = (req, res) => {
     const user_id = req.body.userid
-    const webtoon_id = req.body.webtoon_id
+    const webtoon_id = req.body.webtoonid
     Favorite.findAll({
         where: { user_id, webtoon_id }
     })
