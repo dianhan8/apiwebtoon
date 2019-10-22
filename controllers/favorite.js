@@ -31,7 +31,7 @@ exports.FindAndStore = (req, res) => {
         where: { user_id, webtoon_id }
     })
         .then(function (result) {
-            if (result > 0) {
+            if (result.length > 0) {
                 res.send({
                     message: "This Webtoon Haved"
                 })
