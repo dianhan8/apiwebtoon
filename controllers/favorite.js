@@ -78,7 +78,7 @@ exports.FindAndStore = (req, res) => {
 exports.deleteFavorite = (req, res) => {
     const user_id = req.params.userid
     const webtoon_id = req.params.webtoonid
-    Favorite.delete({
+    Favorite.destroy({
         where: { user_id, webtoon_id }
     })
         .then(function (result) {
