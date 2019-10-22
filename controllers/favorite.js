@@ -35,7 +35,7 @@ exports.FindAndStore = (req, res) => {
                 res.send({
                     message: "This Webtoon Haved"
                 })
-            }else{
+            } else {
                 Favorite.create({
                     user_id,
                     webtoon_id,
@@ -43,10 +43,17 @@ exports.FindAndStore = (req, res) => {
                     updatedAt: new Date()
                 })
                     .then(function (favorite) {
-                        res.send({
-                            condition: true,
-                            message: "This Webtoon has be Saved"
+                        Webtoon.update({
+                            isFavorite: true
+                        }, {
+                            where: { webtoon_id }
                         })
+                            .then(function (result) {
+                                res.send({
+                                    condition: true,
+                                    message: "This Webtoon has be Saved"
+                                })
+                            })
                     })
                     .catch(function (err) {
                         res.send({
@@ -63,6 +70,26 @@ exports.FindAndStore = (req, res) => {
                 error: true,
                 err
             })
-            
+
+        })
+}
+
+//Delete Favorite
+exports.deleteFavorite = (req, res) => {
+    const user_id = req.params.userid
+    const webtoon_id = req.params.webtoonid
+    Favorite.delete({
+        where: { user_id, webtoon_id }
+    })
+        .then(function (result) {
+            res.send({
+                message: "Favorite Has Deleted"
+            })
+        })
+        .catch(function (err) {
+            res.send({
+                message: "Can't Delete Favorite",
+                err
+            })
         })
 }
