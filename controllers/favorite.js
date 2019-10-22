@@ -35,26 +35,6 @@ exports.FindAndStore = (req, res) => {
                 res.send({
                     message: "This Webtoon Haved"
                 })
-            } else {
-                Favorite.create({
-                    user_id,
-                    webtoon_id,
-                    createdAt: new Date(),
-                    updatedAt: new Date()
-                })
-                    .then(function (favorite) {
-                        res.send({
-                            condition: true,
-                            message: "This Webtoon has be Saved"
-                        })
-                    })
-                    .catch(function (err) {
-                        res.send({
-                            message: 'Error Run Create',
-                            error: true,
-                            err
-                        })
-                    })
             }
         })
         .catch(function (err) {
@@ -63,5 +43,24 @@ exports.FindAndStore = (req, res) => {
                 error: true,
                 err
             })
+            Favorite.create({
+                user_id,
+                webtoon_id,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            })
+                .then(function (favorite) {
+                    res.send({
+                        condition: true,
+                        message: "This Webtoon has be Saved"
+                    })
+                })
+                .catch(function (err) {
+                    res.send({
+                        message: 'Error Run Create',
+                        error: true,
+                        err
+                    })
+                })
         })
 }
