@@ -23,6 +23,9 @@ module.exports = {
       favorite_count: {
         type: Sequelize.INTEGER
       },
+      episode_count: {
+        type: Sequelize.INTEGER
+      },
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
