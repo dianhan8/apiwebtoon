@@ -5,8 +5,6 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 2050
 const path = require('path')
-// Public Folder
-app.use(express.static('public'));
 
 const AuthController = require('./controllers/auth')
 const WebtoonController = require('./controllers/webtoon')
