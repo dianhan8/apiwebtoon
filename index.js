@@ -4,6 +4,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 2050
+const path = require('path')
+// Public Folder
+app.use(express.static('public'));
 
 const AuthController = require('./controllers/auth')
 const WebtoonController = require('./controllers/webtoon')
@@ -17,6 +20,7 @@ app.get('/', (req, res) => {
     res.send('Succes')
 })
 
+app.use("/public", express.static(path.join(__dirname, "public")))
 app.use(bodyParser.json())
 app.group('/api/v1', (router) => {
     //User
