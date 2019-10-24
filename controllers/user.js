@@ -59,7 +59,6 @@ function checkFileType(file, cb) {
 //Update User
 exports.updateDataUser = (req, res) => {
     const id = req.user.userId
-    const name = req.body.name
     upload(req, res, (err) => {
         if (err) {
             res.send({
@@ -77,7 +76,7 @@ exports.updateDataUser = (req, res) => {
                 })
                 User.update({
                     image: req.file.path,
-                    name,
+                    name: req.body.name,
                     updateAt: new Date()
                 },
                     {
