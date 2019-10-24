@@ -61,21 +61,22 @@ exports.updateDataUser = (req, res) => {
     const id = req.user.userId
     const name = req.body.name
     upload(req, res, (err) => {
+        console.log(req)
         if (err) {
             res.send({
                 msg: err
             });
         } else {
-            if (req.files == undefined) {
+            if (req.file == undefined) {
                 res.send({
                     msg: 'Error: No File Selected!'
                 });
             } else {
                 res.send({
                     msg: 'File Uploaded!',
-                    dest: req.files.destination,
-                    file: `uploads/${req.files.filename}`,
-                    path: req.files.path
+                    dest: req.file.destination,
+                    file: `uploads/${req.file.filename}`,
+                    path: req.file.path
                 })
                 User.update({
                     image: res.path,
