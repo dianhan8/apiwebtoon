@@ -76,7 +76,7 @@ exports.updateDataUser = (req, res) => {
                     dest: req.file.destination,
                 })
                 User.update({
-                    image: res.file.path,
+                    image: req.file.path,
                     name,
                     updateAt: new Date()
                 },
