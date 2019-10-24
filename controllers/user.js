@@ -61,7 +61,6 @@ exports.updateDataUser = (req, res) => {
     const id = req.user.userId
     const name = req.body.name
     upload(req, res, (err) => {
-        console.log(req)
         if (err) {
             res.send({
                 msg: err
@@ -75,11 +74,9 @@ exports.updateDataUser = (req, res) => {
                 res.send({
                     msg: 'File Uploaded!',
                     dest: req.file.destination,
-                    file: `uploads/${req.file.filename}`,
-                    path: req.file.path
                 })
                 User.update({
-                    image: res.path,
+                    image: res.file.path,
                     name,
                     updateAt: new Date()
                 },
@@ -87,8 +84,14 @@ exports.updateDataUser = (req, res) => {
                         where: { id }
                     })
                     .then(function (result) {
+                        console.log(result)
                         res.send({
                             message: "Succes"
+                        })
+                    })
+                    .catch(function(err){
+                        res.send({
+                            message: "Error"
                         })
                     })
             }
