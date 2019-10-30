@@ -6,20 +6,56 @@ const app = express()
 const port = 2050
 const path = require('path')
 
-const AuthController = require('./controllers/auth')
+//CKECKED
+app.get('/', (req, res) => {
+    res.send('Succes')
+})
+
+//MiddleWare
+const { authenticated } = require('./middleware')
+
+//API V2
+const AuthController = require('./controllers/controllerApiV2/auth')
+const RoomController = require('./controllers/controllerApiV2/room')
+const CustomerController = require('./controllers/controllerApiV2/customers')
+const OrderCustomerController = require('./controllers/controllerApiV2/order')
+const UsersController = require('./controllers/user')
+
+//API V2
+app.group('/api/v2', (router) => {
+    //Users
+    router.get('/user',authenticated, UsersController.GetProfile)
+    router.post('/login', AuthController.login)
+    router.post('/register', AuthController.register)
+
+    //Room
+    router.get('/rooms', authenticated, RoomController.index)
+    router.post('/room', authenticated, RoomController.store)
+    router.patch('/room/:id', authenticated, RoomController.update)
+
+    //Customer
+    router.get('/customers', authenticated, CustomerController.index)
+    router.post('/customer', authenticated, CustomerController.store)
+    router.patch('/customer/:id', authenticated, CustomerController.update)
+
+    //Order
+    router.get('/checkin', authenticated, OrderCustomerController.index)
+    router.post('/checkin', authenticated, OrderCustomerController.store)
+    router.delete('/checkin/:id', authenticated, OrderCustomerController.update)
+})
+
+//STATIC FILE
+app.use("/public", express.static(path.join(__dirname, "public")))
+app.use(bodyParser.json())
+
+//API V1
 const WebtoonController = require('./controllers/webtoon')
 const EpisodeController = require('./controllers/episode')
 const DetailController = require('./controllers/detail')
 const FavoriteController = require('./controllers/favorite')
 const UserController = require('./controllers/user')
-const { authenticated } = require('./middleware')
 
-app.get('/', (req, res) => {
-    res.send('Succes')
-})
-
-app.use("/public", express.static(path.join(__dirname, "public")))
-app.use(bodyParser.json())
+//API v1 
 app.group('/api/v1', (router) => {
     //User
     router.post('/login',
