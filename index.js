@@ -6,6 +6,9 @@ const app = express()
 const port = 2050
 const path = require('path')
 
+//STATIC FILE
+app.use("/public", express.static(path.join(__dirname, "public")))
+app.use(bodyParser.json())
 //CKECKED
 app.get('/', (req, res) => {
     res.send('Succes')
@@ -44,9 +47,6 @@ app.group('/api/v2', (router) => {
     router.delete('/checkin/:id', authenticated, OrderCustomerController.update)
 })
 
-//STATIC FILE
-app.use("/public", express.static(path.join(__dirname, "public")))
-app.use(bodyParser.json())
 
 //API V1
 const WebtoonController = require('./controllers/webtoon')
