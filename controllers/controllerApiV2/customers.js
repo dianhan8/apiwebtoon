@@ -1,4 +1,4 @@
-const Customers = require('./../models').customer
+const Customers = require('./../../models').customer
 const multer = require('multer')
 const path = require('path')
 

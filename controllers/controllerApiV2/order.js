@@ -1,6 +1,6 @@
-const Order = require('./../models').order
-const Room = require('./../models').room
-const Customer = require('./../models').customer
+const Order = require('./../../models').order
+const Room = require('./../../models').room
+const Customer = require('./../../models').customer
 const moment = require('moment')
 exports.index = (req, res) => {
     Room.findAll({
